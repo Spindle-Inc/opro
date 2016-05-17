@@ -8,6 +8,12 @@ class Opro::Oauth::AuthController < OproController
     @scopes       = scope_from_params(params)
   end
 
+  def authorize
+    @redirect_uri = params[:redirect_uri]
+    @client_app   = Opro::Oauth::ClientApp.find_by_app_id(params[:client_id])
+    @scopes       = scope_from_params(params)
+  end
+
   # :ask_user! is called before creating a new authorization, this allows us to redirect
   def create
     # find or create an auth_grant for a given user
