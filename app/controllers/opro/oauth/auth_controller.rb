@@ -5,15 +5,15 @@ class Opro::Oauth::AuthController < OproController
   # POST /opro/oauth/new
   def new
     @redirect_uri = params[:redirect_uri]
-    @client_app   = Opro::Oauth::ClientApp.find_by_app_id(params[:client_id])
-    @scopes       = scope_from_params(params)
+    @client_app = Opro::Oauth::ClientApp.find_by_app_id(params[:client_id])
+    @scopes = scope_from_params(params)
   end
 
   # GET /opro/oauth/authorize
   def authorize
     @redirect_uri = params[:redirect_uri]
-    @client_app   = Opro::Oauth::ClientApp.find_by_app_id(params[:client_id])
-    @scopes       = scope_from_params(params)
+    @client_app = Opro::Oauth::ClientApp.find_by_app_id(params[:client_id])
+    @scopes = scope_from_params(params)
 
     # Render same view
     render 'new'
@@ -24,7 +24,7 @@ class Opro::Oauth::AuthController < OproController
     # :ask_user! is called before creating a new authorization, this allows us to redirect
     # find or create an auth_grant for a given user
     application = Opro::Oauth::ClientApp.find_by_client_id(params[:client_id])
-    auth_grant  = Opro::Oauth::AuthGrant.find_or_create_by_user_app(current_user, application)
+    auth_grant = Opro::Oauth::AuthGrant.find_or_create_by_user_app(current_user, application)
 
     # add permission changes if there are any
     auth_grant.update_permissions(params[:permissions])
@@ -45,7 +45,7 @@ class Opro::Oauth::AuthController < OproController
     else
       # if the request did not come from a form within the application, render the user form
       @redirect_uri ||= params[:redirect_uri]
-      @client_app   ||= Opro::Oauth::ClientApp.find_by_app_id(params[:client_id])
+      @client_app ||= Opro::Oauth::ClientApp.find_by_app_id(params[:client_id])
 
       params.delete('action').delete('controller')
 
@@ -70,7 +70,7 @@ class Opro::Oauth::AuthController < OproController
     return false if request.referrer.blank?
 
     referrer_host = URI.parse(request.referrer).host
-    self_host     = URI.parse(request.url).host
+    self_host = URI.parse(request.url).host
 
     referrer_host == self_host
   end
