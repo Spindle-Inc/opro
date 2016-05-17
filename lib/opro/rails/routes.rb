@@ -11,7 +11,8 @@ module ActionDispatch::Routing
       get  'oauth/new'          => "#{oauth_new_controller}#new",  :as => 'oauth_new'
       get  'oauth/authorize'    => "#{oauth_new_controller}#authorize", :as => 'oauth_authorize'
       post 'oauth/create'    => 'opro/oauth/auth#create',       :as => 'oauth_create'
-      post 'oauth/token'        => "#{oauth_token_controller}#create",      :as => 'oauth_token', :defaults => { :format => 'json' }
+      get 'oauth/token'      => "#{oauth_token_controller}#token", :as => 'oauth_token', :defaults => { :format => 'json' }
+      post 'oauth/token/create'        => "#{oauth_token_controller}#create",      :as => 'oauth_token_create', :defaults => { :format => 'json' }
 
       unless skip_routes.include?(:client_apps)
         oauth_client_apps = controllers[:oauth_client_apps] ||'opro/oauth/client_app'

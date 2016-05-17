@@ -2,11 +2,23 @@
 # codes and refresh_tokens for access_tokens
 
 class Opro::Oauth::TokenController < OproController
-  before_filter      :opro_authenticate_user!,    :except => [:create]
-  skip_before_filter :verify_authenticity_token,  :only   => [:create]
+  before_filter      :opro_authenticate_user!,    :except => [:create, :token]
+  skip_before_filter :verify_authenticity_token,  :only   => [:create, :token]
 
 
   def create
+    # Find the client application
+    application = Opro::Oauth::ClientApp.authenticate(params[:client_id], params[:client_secret])
+
+    if application.present? && (@auth_grant = auth_grant_for(application, params)).present?
+      @auth_grant.refresh!
+      render :create
+    else
+      render_error debug_msg(params, application)
+    end
+  end
+
+  def token
     # Find the client application
     application = Opro::Oauth::ClientApp.authenticate(params[:client_id], params[:client_secret])
 
