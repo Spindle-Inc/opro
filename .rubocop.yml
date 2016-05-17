@@ -1,0 +1,64 @@
+AllCops:
+  TargetRubyVersion: 2.2
+  Exclude:
+    - 'bin/**/*'
+    - 'app/assets/**/*'
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Metrics/BlockNesting:
+  Description: 'Avoid more than 3 levels of block nesting.'
+  Enabled: false
+
+Metrics/ClassLength:
+  Description: 'Class has too many lines.'
+  Enabled: false
+
+Metrics/LineLength:
+  Description: 'Line is too long.'
+  Enabled: false
+
+Metrics/MethodLength:
+  Description: 'Method has too many lines.'
+  Enabled: false
+
+Metrics/AbcSize:
+  Description: 'Assignment Branch Condition size for is too high.'
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Description: 'Cyclomatic complexity for is too high.'
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Description: 'Perceived complexity for is too high.'
+  Enabled: false
+
+Metrics/ParameterLists:
+  Description: 'Avoid parameter lists longer than 5 parameters.'
+  Enabled: false
+
+Metrics/ModuleLength:
+  Description: 'Module has too many lines.'
+  Enabled: false
+
+Style/UnlessElse:
+  Description: 'Do not use `unless` with `else`. Rewrite these with the positive case first.'
+  Enabled: false
+
+Style/Documentation:
+  Description: 'Missing top-level class documentation comment.'
+  Enabled: false
+
+Style/AlignHash:
+  Description: 'Align the elements of a hash literal if they span more than one line.'
+  Enabled: false
+
+Style/ClassVars:
+  Description: 'Replace class var %s with a class instance var.'
+  Enabled: false
+
+Style/RegexpLiteral:
+  Description: 'Use `%r` around regular expression.'
+  Enabled: false
